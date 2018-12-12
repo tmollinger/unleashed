@@ -20,49 +20,65 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="m-1 col-md-4 col-12">
-          <h2 class=""><small class="text-muted">i want to track</small><br></h2>
-          <div class="row wide-drop text-center">
-            <div class="col-md-12">
-              <div class="btn-group">
-                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> choose goal</button>
-                <div class="dropdown-menu"> <a class="dropdown-item" href="#">Miles<br></a><a class="dropdown-item" href="#">Kilometers<br></a><a class="dropdown-item" href="#" contenteditable="true">Time<br><br></a>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          <ul>
+                              {% for message in messages %}
+              <li>{{ message[1] }}</li>
+          {% endfor %}</ul>
+          {% endif %}
+          {% endwith %}
+          <form method="POST" action="/goal">
+            <h2 class=""><small class="text-muted">i want to track</small><br></h2>
+            <div class="row wide-drop text-center">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <select class="form-control" name="goal">
+                    <option value="Kilometers">Kilometers</option>
+                    <option value="Miles">Miles</option>
+                    <option value="Hours">Hours</option>
+                    <option>Minutes</option>
+                  </select>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row m-1 text-center">
-            <div class="col-md-12 m-1">
-              <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active"> Running</a>
-                <a href="#" class="list-group-item list-group-item-action">Swimming</a>
-                <a href="#" class="list-group-item list-group-item-action">Cycling<br></a>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-xs-4 col-4"><a class="btn btn-primary btn-block" href="#">-</a></div>
-                <div class="col-xs-4 col-4 text-center">
-                  <h5 class="">50<br></h5>
-                  <h6 class="">Miles<br></h6>
-                </div>
-                <div class="col-xs-4 col-4"><a class="btn btn-primary btn-block" href="#">+<br></a></div>
-              </div>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-md-12">
-              <div class="btn-group">
-                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">choose duration</button>
-                <div class="dropdown-menu"> <a class="dropdown-item" href="#">per week<br></a><a class="dropdown-item" href="#">per month<br></a>
+            <div class="row m-1 text-center">
+              <div class="col-md-12 m-1">
+                <div class="form-group">
+                  <select class="form-control" name="activity" multiple="">
+                    <option value="run">🏃 Running</option>
+                    <option value="cycle">🚴‍ Cycling</option>
+                    <option value="swim">🏊‍ Swimming</option>
+                  </select>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 text-center m-1"><a class="btn btn-secondary w-100" href="#">Go!</a></div>
-          </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-4 col-4"><a class="btn btn-primary btn-block" href="#">-</a></div>
+                  <div class="col-xs-4 col-4 text-center align-middle">
+                    <h5 class="">50</h5>
+                  </div>
+                  <div class="col-xs-4 col-4"><a class="btn btn-primary btn-block" href="#">+<br></a></div>
+                </div>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col-md-12">
+                <h2 class=""><small class="text-muted">per</small><br></h2>
+                <div class="form-group">
+                  <select class="form-control" name="duration">
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center m-1"><button type="submit" class="btn btn-primary w-100">Go!</button></div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
